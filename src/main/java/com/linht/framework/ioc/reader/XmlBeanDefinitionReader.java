@@ -1,6 +1,7 @@
 package com.linht.framework.ioc.reader;
 
 import com.linht.framework.ioc.bean.BeanDefinition;
+import com.linht.framework.ioc.bean.BeanReference;
 import com.linht.framework.ioc.bean.PropertyValue;
 import com.linht.framework.ioc.resource.ResourceLoader;
 import org.w3c.dom.Document;
@@ -54,12 +55,12 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
         String name = ele.getAttribute("name");
         String className = ele.getAttribute("class");
         BeanDefinition beanDefinition = new BeanDefinition();
-        processProperty(ele,beanDefinition);
+        processProperty(ele, beanDefinition);
         beanDefinition.setBeanClassName(className);
         getRegistry().put(name, beanDefinition);
     }
 
-    private void processProperty(Element ele,BeanDefinition beanDefinition) {
+    private void processProperty(Element ele, BeanDefinition beanDefinition) {
         NodeList propertyNode = ele.getElementsByTagName("property");
         for (int i = 0; i < propertyNode.getLength(); i++) {
             Node node = propertyNode.item(i);
@@ -67,7 +68,18 @@ public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
                 Element propertyEle = (Element) node;
                 String name = propertyEle.getAttribute("name");
                 String value = propertyEle.getAttribute("value");
-                beanDefinition.getPropertyValues().add(new PropertyValue(name,value));
+
+                if (value != null && value.length() > 0) {
+                    beanDefinition.getPropertyValues().add(new PropertyValue(name, value));
+                } else {
+                    String ref = propertyEle.getAttribute("ref");
+                    if (ref == null || ref.length() == 0) {
+                        throw new IllegalArgumentException("Configuration problem: <property> element for property '"
+                                + name + "' must specify a ref or value");
+                    }
+                    BeanReference beanReference = new BeanReference(ref);
+                    beanDefinition.getPropertyValues().add(new PropertyValue(name, beanReference));
+                }
             }
         }
     }

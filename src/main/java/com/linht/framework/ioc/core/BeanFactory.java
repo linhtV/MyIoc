@@ -10,12 +10,6 @@ public interface BeanFactory {
      * @return
      * @throws Exception
      */
-    Object getBean(String name);
+    Object getBean(String name) throws Exception ;
 
-    /**
-     * 注册bean
-     * @param name
-     * @param beanDefinition
-     */
-    void registerBeanDefinition(String name, BeanDefinition beanDefinition) throws Exception;
 }

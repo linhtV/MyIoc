@@ -12,4 +12,12 @@
         <property name="text" value="Hello World!"></property>
     </bean>
 
+    <bean name="mouth" class="com.linht.framework.ioc.entity.Mouth">
+    </bean>
+
+    <bean name="robot" class="com.linht.framework.ioc.entity.Robot">
+        <property name="hand" ref="hand"></property>
+        <property name="mouth" ref="mouth"></property>
+    </bean>
+
 </beans>
