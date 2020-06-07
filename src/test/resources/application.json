@@ -1,0 +1,24 @@
+[
+  {
+    "name": "robot",
+    "className": "com.linht.framework.ioc.entity.Robot"
+  },
+  {
+    "name": "hand",
+    "className": "com.linht.framework.ioc.entity.Hand"
+  },
+  {
+    "name": "mouth",
+    "className": "com.linht.framework.ioc.entity.Mouth",
+    "constructorArgs": [
+      {
+        "index": 1,
+        "name": "name",
+        "value": "hello"
+      }
+    ]
+  }
+]
+
+
+
