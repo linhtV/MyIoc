@@ -20,7 +20,7 @@ public class JdkDynamicAopProxyTest {
         TargetSource targetSource = new TargetSource(body, Body.class);
         advisedSupport.setTargetSource(targetSource);
 
-        // 2. 设置拦截器(Advice)
+        // 2. 设置拦截器(Advisor)
         TimerInterceptor timerInterceptor = new TimerInterceptor();
         advisedSupport.setMethodInterceptor(timerInterceptor);
 
@@ -29,7 +29,7 @@ public class JdkDynamicAopProxyTest {
         Body bodyProxy = (Body) jdkDynamicAopProxy.getProxy();
 
         // 4. 基于AOP的调用
-        body.show();
+        bodyProxy.show();
 
     }
 

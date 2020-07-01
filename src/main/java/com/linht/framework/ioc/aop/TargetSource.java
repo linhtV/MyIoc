@@ -6,14 +6,24 @@ import lombok.Getter;
 /**
  * 被代理的对象
  */
-@AllArgsConstructor
 public class TargetSource {
 
-    @Getter
+    private Class<?>[] targetClass;
+
     private Object target;
 
-    @Getter
-    private Class targetClass;
+    public TargetSource(Object target, Class<?>... targetClass) {
+        this.target = target;
+        this.targetClass = targetClass;
+    }
+
+    public Class<?>[] getTargetClass() {
+        return targetClass;
+    }
+
+    public Object getTarget() {
+        return target;
+    }
 
 
 }

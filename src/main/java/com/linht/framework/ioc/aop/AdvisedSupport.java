@@ -14,4 +14,8 @@ public class AdvisedSupport {
     private TargetSource targetSource;
 
     private MethodInterceptor methodInterceptor;
+
+    private MethodMatcher methodMatcher;
+
+
 }
